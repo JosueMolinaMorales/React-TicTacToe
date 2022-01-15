@@ -78,10 +78,8 @@ class Board extends React.Component {
         let status;
         if(winner) {
             status = 'Winner: ' + winner;
-            <playAgain onClick={() => this.playAgain()} />
         }else if(isTied) {
             status = "Game is tied!";
-            <playAgain onClick={() => this.playAgain()} />
         }else {
             status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
