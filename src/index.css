@@ -31,7 +31,9 @@ body {
     text-align: center;
     width: 34px;
   }
-  
+  .square:hover {
+      background-color: green;
+  }
   .square:focus {
     outline: none;
   }
