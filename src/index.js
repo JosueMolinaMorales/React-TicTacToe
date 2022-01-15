@@ -14,6 +14,14 @@ function Square(props) {
         </button>
     );
 }
+
+function PlayAgain(props) {
+    return (
+        <button className='play-again' onClick={props.onClick}>
+            Play Again?
+        </button>
+    )
+}
  
 /**
  * React Component that renders the tic-tac-toe board using the square component
@@ -45,10 +53,23 @@ class Board extends React.Component {
         });
     }
 
+    playAgain() {
+        const squares = this.state.squares.slice();
+        squares.fill(null);
+        this.setState({
+            squares: squares,
+            xIsNext: true,
+        });
+    }
+
     renderSquare(i) {
         return <Square value={this.state.squares[i]}
             onClick={() => this.handleClick(i)}
         />;
+    }
+
+    renderPlayAgainButton() {
+        return <PlayAgain onClick={() => this.playAgain()} />;
     }
   
     render() {
@@ -57,8 +78,10 @@ class Board extends React.Component {
         let status;
         if(winner) {
             status = 'Winner: ' + winner;
+            <playAgain onClick={() => this.playAgain()} />
         }else if(isTied) {
             status = "Game is tied!";
+            <playAgain onClick={() => this.playAgain()} />
         }else {
             status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
@@ -80,6 +103,9 @@ class Board extends React.Component {
                 {this.renderSquare(6)}
                 {this.renderSquare(7)}
                 {this.renderSquare(8)}
+            </div>
+            <div hidden={!winner && !isTied}>
+                {this.renderPlayAgainButton()}
             </div>
             </div>
       );
